@@ -19,11 +19,11 @@ def read(*names, **kwargs):
 
 def read_version():
     """Read the `(version-string, version-info)` from
-    `src/pygments-ranges/version.py`.
+    `src/highlight-ranges/version.py`.
     """
 
     version_file = local_file(
-        'src', 'pygments_ranges', 'version.py')
+        'src', 'highlight_ranges', 'version.py')
     local_vars = {}
     with open(version_file) as handle:
         exec(handle.read(), {}, local_vars)  # pylint: disable=exec-used
@@ -33,7 +33,7 @@ def read_version():
 long_description = read(local_file('README.rst'), mode='rt')
 
 setup(
-    name='pygments_ranges',
+    name='highlight_ranges',
     version=read_version()[0],
     packages=find_packages('src'),
 
@@ -42,7 +42,7 @@ setup(
     description='Highlighting ranges in pygments',
     license='MIT',
     keywords='',
-    url='http://github.com/sixty-north/pygments-ranges/',
+    url='http://github.com/sixty-north/highlight-ranges/',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Operating System :: OS Independent',
@@ -52,7 +52,7 @@ setup(
     platforms='any',
     include_package_data=True,
     package_dir={'': 'src'},
-    # package_data={'pygments-ranges': . . .},
+    # package_data={'highlight-ranges': . . .},
     install_requires=[
         'pygments',
         'spor',
@@ -67,10 +67,10 @@ setup(
     },
     entry_points={
         'pygments.lexers': [
-            'spor_range_lexer = pygments_ranges.lexer:SporRangeLexer'
+            'spor_range_lexer = highlight_ranges.lexer:SporRangeLexer'
         ],
         # 'console_scripts': [
-        #    'pygments-ranges = pygments-ranges.cli:main',
+        #    'highlight-ranges = highlight-ranges.cli:main',
         # ],
     },
     long_description=long_description,

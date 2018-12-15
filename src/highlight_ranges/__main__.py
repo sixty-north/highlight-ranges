@@ -4,7 +4,7 @@ import sys
 from pygments import highlight
 from pygments.formatters.html import HtmlFormatter
 
-from pygments_ranges.lexer import SporRangeLexer
+from highlight_ranges.lexer import SporRangeLexer
 
 # TODO: Let user specify a base lexer. Build a SporRangeLexer from it.
 # TODO: Let use specify CSS file name.

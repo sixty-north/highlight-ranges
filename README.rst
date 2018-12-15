@@ -1,3 +1,3 @@
-pygments-ranges
+highlight-ranges
 
-Highlighting ranges in pygments
+Highlighting ranges in code using pygments.
