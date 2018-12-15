@@ -54,6 +54,8 @@ setup(
     package_dir={'': 'src'},
     # package_data={'highlight-ranges': . . .},
     install_requires=[
+        'docopt',
+        'exit-codes',
         'pygments',
         'spor',
     ],
@@ -67,11 +69,11 @@ setup(
     },
     entry_points={
         'pygments.lexers': [
-            'spor_range_lexer = highlight_ranges.lexer:SporRangeLexer'
+            'spor_range_lexer=highlight_ranges.lexer:SporRangeLexer'
         ],
-        # 'console_scripts': [
-        #    'highlight-ranges = highlight-ranges.cli:main',
-        # ],
+        'console_scripts': [
+           'highlight-ranges=highlight_ranges.cli:main',
+        ],
     },
     long_description=long_description,
 )
