@@ -8,6 +8,7 @@ Usage:
 Options:
   -h --help        Show this screen.
   --version        Show version.
+  --lexer=NAME     Name of the pygments lexer to use [default: python3]
   --div-only       Only generate the div snippet, not the full HTML
   --css-file=FILE  File contains the CSS to embed in the HTML
 """
@@ -18,11 +19,13 @@ from docopt import docopt
 from exit_codes import ExitCode
 from pygments import highlight
 from pygments.formatters.html import HtmlFormatter
+import pygments.lexers
 
-from highlight_ranges.lexer import SporRangeLexer
+from highlight_ranges.lexer import create_lexer 
 from highlight_ranges.version import __version__
 
-# TODO: Fill this out. Maybe find if there's an existing CSS for pygments code to steal.
+# TODO: Fill this out. Maybe find if there's an existing CSS for pygments code
+# to steal.
 DEFAULT_CSS = """
 .err {
     background-color: red;
@@ -61,12 +64,17 @@ def get_css(css_file=None):
         return handle.read()
 
 
-def get_div(code):
+def get_lexer(lexer_name):
+    base_lexer = pygments.lexers.get_lexer_by_name(lexer_name)    
+    return create_lexer(type(base_lexer))
+
+
+def get_div(lexer_class, code):
     highlighted = StringIO()
 
     highlight(
         code,
-        lexer=SporRangeLexer(),
+        lexer=lexer_class(),
         formatter=HtmlFormatter(),
         outfile=highlighted)
 
@@ -84,7 +92,8 @@ def get_html(css, div):
 
 def generate_output(arguments):
     code = get_code(arguments['<source-file>'])
-    div = get_div(code)
+    lexer = get_lexer(arguments['--lexer'])
+    div = get_div(lexer, code)
 
     if arguments['--div-only']:
         output = div
