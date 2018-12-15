@@ -68,9 +68,6 @@ setup(
         'test': ['pytest'],
     },
     entry_points={
-        'pygments.lexers': [
-            'spor_range_lexer=highlight_ranges.lexer:SporRangeLexer'
-        ],
         'console_scripts': [
            'highlight-ranges=highlight_ranges.cli:main',
         ],
