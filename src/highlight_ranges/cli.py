@@ -27,7 +27,7 @@ from highlight_ranges.version import __version__
 # TODO: Fill this out. Maybe find if there's an existing CSS for pygments code
 # to steal.
 DEFAULT_CSS = """
-.err {
+.ge {
     background-color: red;
     color: black;
 }

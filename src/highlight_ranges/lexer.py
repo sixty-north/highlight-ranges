@@ -1,5 +1,5 @@
 from pygments.lexers.python import PythonLexer
-from pygments.token import Error
+from pygments.token import Generic
 
 
 def create_lexer(base_lexer_class):
@@ -13,7 +13,7 @@ def create_lexer(base_lexer_class):
         def get_tokens_unprocessed(self, text):
             for index, token, value in PythonLexer.get_tokens_unprocessed(self, text):
                 if index >= self.HIGHLIGHT_RANGE[0] and index <= self.HIGHLIGHT_RANGE[1]:
-                    yield index, Error, value
+                    yield index, Generic.Emph, value
                 else:
                     yield index, token, value
 
