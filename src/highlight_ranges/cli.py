@@ -19,31 +19,10 @@ from docopt import docopt
 from exit_codes import ExitCode
 from pygments import highlight
 from pygments.formatters.html import HtmlFormatter
-import pygments.lexers
 
-from highlight_ranges.lexer import create_lexer 
+from highlight_ranges.css import get_css
+from highlight_ranges.lexer import get_lexer_class
 from highlight_ranges.version import __version__
-
-# TODO: Fill this out. Maybe find if there's an existing CSS for pygments code
-# to steal.
-DEFAULT_CSS = """
-.ge {
-    background-color: red;
-    color: black;
-}
-
-.k {
-    color: blue;
-}
-
-.c1 {
-    color: green;
-}
-
-.s2 {
-    color: red;
-}
-"""
 
 HTML_TEMPLATE = """<html>
 <head>
@@ -54,19 +33,6 @@ HTML_TEMPLATE = """<html>
 {code}
 </html>
 """
-
-
-def get_css(css_file=None):
-    if css_file is None:
-        return DEFAULT_CSS
-
-    with open(css_file, mode='rt') as handle:
-        return handle.read()
-
-
-def get_lexer(lexer_name):
-    base_lexer = pygments.lexers.get_lexer_by_name(lexer_name)    
-    return create_lexer(type(base_lexer))
 
 
 def get_div(lexer_class, code):
@@ -92,8 +58,8 @@ def get_html(css, div):
 
 def generate_output(arguments):
     code = get_code(arguments['<source-file>'])
-    lexer = get_lexer(arguments['--lexer'])
-    div = get_div(lexer, code)
+    lexer_class = get_lexer_class(arguments['--lexer'])
+    div = get_div(lexer_class, code)
 
     if arguments['--div-only']:
         output = div

@@ -1,8 +1,14 @@
+from pygments.lexers import get_lexer_by_name
 from pygments.lexers.python import PythonLexer
 from pygments.token import Generic
 
 
-def create_lexer(base_lexer_class):
+def get_lexer_class(lexer_name):
+    base_lexer = get_lexer_by_name(lexer_name)
+
+    # TODO: Is there are more direct way to get this class?
+    base_lexer_class = type(base_lexer)
+
     class SporRangeLexer(base_lexer_class):
         HIGHLIGHT_RANGE = (20, 30)
 
