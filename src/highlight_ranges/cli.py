@@ -6,11 +6,11 @@ Usage:
   highlight-ranges --version
 
 Options:
-  -h --help        Show this screen.
-  --version        Show version.
+  -h --help        Show this screen
+  --version        Show version
   --lexer=NAME     Name of the pygments lexer to use [default: python3]
   --div-only       Only generate the div snippet, not the full HTML
-  --css-file=FILE  File contains the CSS to embed in the HTML
+  --css-file=FILE  File containing extra CSS
 """
 from io import StringIO
 import sys
