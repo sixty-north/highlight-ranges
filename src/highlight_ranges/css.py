@@ -1,3 +1,5 @@
+"""Support for styling the output with CSS.
+"""
 import pkg_resources
 
 
