@@ -14,10 +14,6 @@ class SporRangeFilter(Filter):
                 return (start >= anchor.context.offset and
                         stop <= (anchor.context.offset + len(anchor.context.topic)))
 
-    # TODO: I *think* we can split values at the point where they overlap
-    # ranges, thereby letting us highlight the exact ranges specified instead of
-    # on whole-token boundaries.
-
     def filter(self, lexer, stream):
         start = 0
         for ttype, value in stream:
