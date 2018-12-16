@@ -11,6 +11,7 @@
             "module": "highlight_ranges.cli",
             "cwd": "${workspaceFolder}/sample",
             "args": [
+                "--css-file=sample.css",
                 "sample.py",
                 ">",
                 "sample.html"
