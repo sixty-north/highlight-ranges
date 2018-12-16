@@ -1,7 +1,10 @@
 """Pygments filter that uses spor to highlight ranges of code.
 """
+import pathlib
+
 from pygments.filter import Filter
 from pygments.token import Generic
+from spor.repository import open_repository
 
 
 class SporRangeFilter(Filter):
@@ -15,9 +18,12 @@ class SporRangeFilter(Filter):
         anchors: An iterable of spor anchors to use.
     """
 
-    def __init__(self, anchors, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self._anchors = tuple(anchors)
+    def __init__(self, **options):
+        super().__init__(**options)
+        file_path = pathlib.Path(options['file'])
+        repo = open_repository(file_path)
+        self._anchors = tuple(anchor for _, anchor in repo.items()
+                              if anchor.file_path == file_path.absolute())
 
     def _should_highlight(self, start, stop):
         "Whether the range `[start,stop]` should be highlighted."

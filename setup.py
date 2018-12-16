@@ -19,7 +19,7 @@ def read(*names, **kwargs):
 
 def read_version():
     """Read the `(version-string, version-info)` from
-    `src/highlight-ranges/version.py`.
+    `src/highlight_ranges/version.py`.
     """
 
     version_file = local_file(
@@ -52,10 +52,8 @@ setup(
     platforms='any',
     include_package_data=True,
     package_dir={'': 'src'},
-    package_data={'highlight_ranges': ['data/*.css']},
+    # package_data={'highlight_ranges': ['data/*.css']},
     install_requires=[
-        'docopt',
-        'exit-codes',
         'pygments',
         'spor',
     ],
@@ -68,9 +66,12 @@ setup(
         'test': ['pytest'],
     },
     entry_points={
-        'console_scripts': [
-           'highlight-ranges=highlight_ranges.cli:main',
-        ],
+        'pygments.filters': [
+            'highlight-ranges = highlight_ranges.filters:SporRangeFilter',
+        ], 
+        'pygments.styles': [
+            'highlight-ranges-black-on-red = highlight_ranges.styles:BlackOnRed',
+        ]
     },
     long_description=long_description,
 )

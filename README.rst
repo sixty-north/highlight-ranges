@@ -4,9 +4,9 @@ highlight-ranges
 
 Highlight ranges of code in `pygments <http://pygments.org>`_ output.
 
-This lets you specify ranges of source code that should be highlighted in the
-output produced by pygments. You specify the ranges by creating `spor
-<http://github.com/abingham/spor>`_ anchors with metadata where the key
+This provides a filter that uses `spor <http://github.com/abingham/spor>`_
+anchors to determine which ranges of code to highlight in the pygmentized
+output. You specify the ranges by creating anchors with metadata where the key
 "highlight" is `true`, e.g.:
 
 .. code-block:: json
@@ -33,21 +33,34 @@ second line in the file::
     spor init
     spor add example.py 17 9 5
 
-Finally, use the ``highlight-ranges`` command to generate the pygmentized HTML
+Finally, use the ``highlight-ranges`` filter to generate the pygmentized HTML
 of the code::
 
-    highlight-ranges example.py > example.html
+    pygmentize -l python3 -f html -O full -F highlight-ranges:file=example.py example.py > example.html
 
 If you open ``example.html`` in a browser, you should see the second line in the
-code highlighted in red.
+code emphasized.
 
 Installation
 ============
 
-You can install from PyPI with `pip:`:
+You can install from PyPI with `pip:`::
 
     pip install highlight-ranges
 
 Or you can install from source::
 
     pip install .
+
+Styling
+=======
+
+The filter marks highlighted ranges of code with the ``Generic.Emph`` type. From
+a CSS point of view, this means you can style the highlights via the ``ge``
+class.
+
+Filter options
+==============
+
+file
+  The file being pygmentized.
