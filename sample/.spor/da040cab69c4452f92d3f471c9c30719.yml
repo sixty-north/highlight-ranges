@@ -1,0 +1,1 @@
+{"!spor_anchor": {"file_path": "sample.py", "encoding": "utf-8", "context": {"!spor_context": {"before": "a comment\n", "after": "\n    \"docs", "topic": "def foo():", "offset": 20, "width": 10}}, "metadata": {"highlight": true}}}
