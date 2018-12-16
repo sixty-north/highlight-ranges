@@ -52,7 +52,7 @@ setup(
     platforms='any',
     include_package_data=True,
     package_dir={'': 'src'},
-    # package_data={'highlight-ranges': . . .},
+    package_data={'highlight_ranges': ['data/*.css']},
     install_requires=[
         'docopt',
         'exit-codes',
