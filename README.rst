@@ -31,12 +31,12 @@ Now initialize a spor repository and add an anchor that will highlight the
 second line in the file::
 
     spor init
-    spor add example.py 17 9 5
+    echo '{"highlight": true}' | spor add example.py 17 9 5
 
 Finally, use the ``highlight-ranges`` filter to generate the pygmentized HTML
 of the code::
 
-    pygmentize -l python3 -f html -O full -F highlight-ranges:file=example.py example.py > example.html
+    pygmentize -l python3 -f html -O full,style=highlight-ranges-black-on-red -F highlight-ranges:file=example.py example.py > example.html
 
 If you open ``example.html`` in a browser, you should see the second line in the
 code emphasized.
