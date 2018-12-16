@@ -12,30 +12,15 @@ Options:
   --div-only       Only generate the div snippet, not the full HTML
   --css-file=FILE  File containing extra CSS
 """
-from io import StringIO
 import sys
 
 from docopt import docopt
 from exit_codes import ExitCode
-from pygments import highlight
-from pygments.formatters.html import HtmlFormatter
+from pygments.lexers import get_lexer_by_name
 
 from highlight_ranges.css import get_css
-from highlight_ranges.html import get_html
-from highlight_ranges.lexer import get_lexer_class
+from highlight_ranges.html import get_div, get_html
 from highlight_ranges.version import __version__
-
-
-def get_div(lexer_class, code):
-    highlighted = StringIO()
-
-    highlight(
-        code,
-        lexer=lexer_class(),
-        formatter=HtmlFormatter(),
-        outfile=highlighted)
-
-    return highlighted.getvalue()
 
 
 def get_code(source_file):
@@ -45,8 +30,8 @@ def get_code(source_file):
 
 def generate_output(arguments):
     code = get_code(arguments['<source-file>'])
-    lexer_class = get_lexer_class(arguments['--lexer'])
-    div = get_div(lexer_class, code)
+    lexer = get_lexer_by_name(arguments['--lexer'])
+    div = get_div(lexer, code)
 
     if arguments['--div-only']:
         output = div
