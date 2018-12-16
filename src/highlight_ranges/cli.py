@@ -12,6 +12,7 @@ Options:
   --div-only       Only generate the div snippet, not the full HTML
   --css-file=FILE  File containing extra CSS
 """
+from pathlib import Path
 import sys
 
 from docopt import docopt
@@ -23,15 +24,9 @@ from highlight_ranges.html import get_div, get_html
 from highlight_ranges.version import __version__
 
 
-def get_code(source_file):
-    with open(source_file, mode='rt') as handle:
-        return handle.read()
-
-
 def generate_output(arguments):
-    code = get_code(arguments['<source-file>'])
     lexer = get_lexer_by_name(arguments['--lexer'])
-    div = get_div(lexer, code)
+    div = get_div(lexer, Path(arguments['<source-file>']))
 
     if arguments['--div-only']:
         output = div
