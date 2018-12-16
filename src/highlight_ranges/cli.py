@@ -21,18 +21,9 @@ from pygments import highlight
 from pygments.formatters.html import HtmlFormatter
 
 from highlight_ranges.css import get_css
+from highlight_ranges.html import get_html
 from highlight_ranges.lexer import get_lexer_class
 from highlight_ranges.version import __version__
-
-HTML_TEMPLATE = """<html>
-<head>
-    <style>
-    {css}
-    </style>
-</head>
-{code}
-</html>
-"""
 
 
 def get_div(lexer_class, code):
@@ -50,10 +41,6 @@ def get_div(lexer_class, code):
 def get_code(source_file):
     with open(source_file, mode='rt') as handle:
         return handle.read()
-
-
-def get_html(css, div):
-    return HTML_TEMPLATE.format(css=css, code=div)
 
 
 def generate_output(arguments):
